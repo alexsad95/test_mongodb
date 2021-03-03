@@ -16,13 +16,8 @@ function initDB() {
     console.error(`Mongoose connection error: ${err}`);
   });
 
-  mongoose.connection.on('disconnected', () => {
-    console.error('Mongoose connection disconnected');
-  });
-
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {
-      console.warn('Mongoose connection disconnected through app termination');
       process.exit(0);
     });
   });
